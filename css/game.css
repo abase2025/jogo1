@@ -1,0 +1,514 @@
+/* ===== GAME SCREEN STYLES ===== */
+#game-screen {
+    background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+/* ===== GAME CANVAS ===== */
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #FFE4E1 100%);
+    cursor: crosshair;
+    z-index: 1;
+}
+
+/* ===== GAME HUD ===== */
+.game-hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hud-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* ===== HEALTH BAR ===== */
+.health-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 200px;
+}
+
+.hud-label {
+    font-weight: 600;
+    color: #2C3E50;
+    font-size: 0.9rem;
+}
+
+.bar-container {
+    flex: 1;
+    height: 20px;
+    background: rgba(189, 195, 199, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #BDC3C7;
+}
+
+.bar {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.3s ease;
+}
+
+.bar.health {
+    background: linear-gradient(90deg, #E74C3C 0%, #27AE60 50%, #2ECC71 100%);
+}
+
+.bar-value {
+    font-weight: 600;
+    color: #2C3E50;
+    font-size: 0.9rem;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* ===== SCORE E LEVEL DISPLAY ===== */
+.score-display,
+.level-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(74, 144, 226, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 2px solid #4A90E2;
+}
+
+.score-value,
+.level-value {
+    font-weight: 600;
+    color: #4A90E2;
+    font-size: 1.1rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* ===== WEAPON SELECTOR ===== */
+.weapon-selector {
+    display: flex;
+    gap: 0.5rem;
+    pointer-events: all;
+}
+
+.weapon-slot {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 3px solid #BDC3C7;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.weapon-slot:hover {
+    transform: scale(1.1);
+    border-color: #4A90E2;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.weapon-slot.active {
+    border-color: #27AE60;
+    background: rgba(39, 174, 96, 0.2);
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
+}
+
+.weapon-slot img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.weapon-key {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    background: rgba(44, 62, 80, 0.8);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 3px;
+    line-height: 1;
+}
+
+/* ===== GAME CONTROLS ===== */
+.game-controls {
+    display: flex;
+    gap: 0.5rem;
+    pointer-events: all;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #BDC3C7;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    border-color: #4A90E2;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===== EDUCATIONAL TIP OVERLAY ===== */
+.tip-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    pointer-events: all;
+}
+
+.tip-overlay.hidden {
+    display: none;
+}
+
+.tip-content {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: tipSlideIn 0.5s ease-out;
+}
+
+.tip-title {
+    color: #2C3E50;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #4A90E2;
+    padding-bottom: 0.5rem;
+}
+
+.tip-text {
+    color: #34495E;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.tip-close {
+    background: linear-gradient(45deg, #27AE60, #2ECC71);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tip-close:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* ===== GAME ENTITIES STYLES ===== */
+.game-entity {
+    position: absolute;
+    transition: all 0.1s ease;
+    z-index: 50;
+}
+
+.hero {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #4A90E2, #357ABD);
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+.enemy {
+    border-radius: 50%;
+    border: 2px solid #2C3E50;
+}
+
+.enemy.carie {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, #8B4513, #654321);
+    box-shadow: 0 0 10px rgba(139, 69, 19, 0.5);
+}
+
+.enemy.placa {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #228B22, #006400);
+    box-shadow: 0 0 10px rgba(34, 139, 34, 0.5);
+}
+
+.enemy.gengivite {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #DC143C, #B22222);
+    box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+}
+
+.projectile {
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+}
+
+/* ===== PARTICLE EFFECTS ===== */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 75;
+}
+
+.particle.damage {
+    color: #E74C3C;
+    font-weight: 600;
+    font-size: 1.2rem;
+    animation: damageFloat 1s ease-out forwards;
+}
+
+.particle.heal {
+    color: #27AE60;
+    font-weight: 600;
+    font-size: 1.2rem;
+    animation: healFloat 1s ease-out forwards;
+}
+
+.particle.explosion {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #FFD700, transparent);
+    border-radius: 50%;
+    animation: explode 0.5s ease-out forwards;
+}
+
+/* ===== GAME ANIMATIONS ===== */
+@keyframes tipSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes damageFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.2);
+    }
+}
+
+@keyframes healFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.1);
+    }
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+@keyframes enemySpawn {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.enemy {
+    animation: enemySpawn 0.3s ease-out;
+}
+
+/* ===== POWER-UP EFFECTS ===== */
+.powerup {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #FFD700;
+    animation: powerupFloat 2s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.powerup.health {
+    background: radial-gradient(circle, #E74C3C, #C0392B);
+}
+
+.powerup.weapon {
+    background: radial-gradient(circle, #3498DB, #2980B9);
+}
+
+.powerup.shield {
+    background: radial-gradient(circle, #F39C12, #E67E22);
+}
+
+@keyframes powerupFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(180deg);
+    }
+}
+
+/* ===== COMBO SYSTEM ===== */
+.combo-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFD700;
+    font-size: 2rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    pointer-events: none;
+    z-index: 150;
+    animation: comboShow 2s ease-out forwards;
+}
+
+@keyframes comboShow {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* ===== BOSS HEALTH BAR ===== */
+.boss-health-bar {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 120;
+}
+
+.boss-name {
+    text-align: center;
+    font-weight: 600;
+    color: #E74C3C;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.boss-bar-container {
+    height: 15px;
+    background: rgba(189, 195, 199, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #E74C3C;
+}
+
+.boss-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #E74C3C, #C0392B);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+}
+

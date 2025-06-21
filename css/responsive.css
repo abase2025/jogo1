@@ -1,0 +1,457 @@
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* ===== MOBILE FIRST APPROACH ===== */
+@media (max-width: 768px) {
+    /* Menu principal mobile */
+    .game-logo h1 {
+        font-size: 2rem;
+    }
+    
+    .game-subtitle {
+        font-size: 1rem;
+    }
+    
+    .menu-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    .btn-icon {
+        font-size: 1.2rem;
+    }
+    
+    /* Containers mobile */
+    .tutorial-container,
+    .glossary-container,
+    .achievements-container,
+    .settings-container,
+    .game-over-container,
+    .victory-container,
+    .pause-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+    
+    .tutorial-container h2,
+    .glossary-container h2,
+    .achievements-container h2,
+    .settings-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Game HUD mobile */
+    .game-hud {
+        padding: 0.5rem;
+    }
+    
+    .hud-top,
+    .hud-bottom {
+        padding: 0.8rem;
+        border-radius: 10px;
+    }
+    
+    .hud-top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8rem;
+    }
+    
+    .health-bar {
+        min-width: auto;
+        justify-content: space-between;
+    }
+    
+    .score-display,
+    .level-display {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    /* Weapon selector mobile */
+    .weapon-slot {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .weapon-slot img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .weapon-key {
+        font-size: 0.6rem;
+    }
+    
+    .control-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    /* Canvas mobile */
+    #game-canvas {
+        cursor: default;
+    }
+    
+    /* Tip overlay mobile */
+    .tip-content {
+        margin: 1rem;
+        padding: 1.5rem;
+        max-width: calc(100% - 2rem);
+    }
+    
+    .tip-title {
+        font-size: 1.2rem;
+    }
+    
+    .tip-text {
+        font-size: 1rem;
+    }
+    
+    /* Achievements grid mobile */
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Settings mobile */
+    .setting-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .setting-item label {
+        margin-bottom: 0.5rem;
+    }
+    
+    .setting-item input[type="range"] {
+        margin: 0.5rem 0;
+    }
+    
+    .settings-buttons {
+        flex-direction: column;
+    }
+    
+    /* Boss health bar mobile */
+    .boss-health-bar {
+        width: calc(100% - 2rem);
+        left: 1rem;
+        transform: none;
+        top: 70px;
+    }
+    
+    /* Particles mobile */
+    .particle.damage,
+    .particle.heal {
+        font-size: 1rem;
+    }
+    
+    .combo-display {
+        font-size: 1.5rem;
+    }
+}
+
+/* ===== TABLET STYLES ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .game-logo h1 {
+        font-size: 2.5rem;
+    }
+    
+    .menu-btn {
+        font-size: 1.05rem;
+        min-height: 55px;
+    }
+    
+    .hud-top {
+        flex-wrap: nowrap;
+    }
+    
+    .weapon-slot {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .weapon-slot img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .boss-health-bar {
+        width: 350px;
+    }
+}
+
+/* ===== DESKTOP LARGE SCREENS ===== */
+@media (min-width: 1200px) {
+    .game-logo h1 {
+        font-size: 3.5rem;
+    }
+    
+    .game-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .menu-btn {
+        font-size: 1.2rem;
+        min-height: 65px;
+    }
+    
+    .tutorial-container,
+    .glossary-container,
+    .achievements-container,
+    .settings-container {
+        max-width: 900px;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .boss-health-bar {
+        width: 500px;
+    }
+    
+    .combo-display {
+        font-size: 2.5rem;
+    }
+}
+
+/* ===== LANDSCAPE ORIENTATION ===== */
+@media (orientation: landscape) and (max-height: 600px) {
+    .game-hud {
+        padding: 0.3rem;
+    }
+    
+    .hud-top,
+    .hud-bottom {
+        padding: 0.5rem;
+    }
+    
+    .weapon-slot {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .weapon-slot img {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .boss-health-bar {
+        top: 50px;
+        width: 300px;
+    }
+    
+    .tip-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+@media (hover: none) and (pointer: coarse) {
+    /* Increase touch targets */
+    .menu-btn {
+        min-height: 60px;
+        padding: 1rem 2rem;
+    }
+    
+    .weapon-slot {
+        min-width: 55px;
+        min-height: 55px;
+    }
+    
+    .control-btn {
+        min-width: 50px;
+        min-height: 50px;
+    }
+    
+    /* Remove hover effects */
+    .menu-btn:hover,
+    .weapon-slot:hover,
+    .control-btn:hover {
+        transform: none;
+    }
+    
+    /* Add active states for touch feedback */
+    .menu-btn:active {
+        transform: scale(0.95);
+        background: linear-gradient(45deg, #E6F3FF, #D6E9FF);
+    }
+    
+    .menu-btn.primary:active {
+        background: linear-gradient(45deg, #357ABD, #2E6BA8);
+    }
+    
+    .weapon-slot:active {
+        transform: scale(0.9);
+    }
+    
+    .control-btn:active {
+        transform: scale(0.9);
+    }
+    
+    /* Optimize canvas for touch */
+    #game-canvas {
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
+/* ===== HIGH DPI DISPLAYS ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Ensure crisp rendering on retina displays */
+    .weapon-slot img,
+    .achievement-icon {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    /* Disable animations for users who prefer reduced motion */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .loading-logo h1 {
+        animation: none;
+    }
+    
+    .game-logo h1 {
+        animation: none;
+    }
+    
+    .enemy {
+        animation: none;
+    }
+    
+    .powerup {
+        animation: none;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .screen {
+        display: none !important;
+    }
+    
+    body::after {
+        content: "Este é um jogo interativo que não pode ser impresso. Visite o site para jogar!";
+        display: block;
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 50vh;
+        transform: translateY(-50%);
+    }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    /* Adjust colors for dark mode if needed */
+    .tutorial-container,
+    .glossary-container,
+    .achievements-container,
+    .settings-container,
+    .game-over-container,
+    .victory-container,
+    .pause-container {
+        background: rgba(44, 62, 80, 0.95);
+        color: #ECF0F1;
+    }
+    
+    .tutorial-container h2,
+    .glossary-container h2,
+    .achievements-container h2,
+    .settings-container h2 {
+        color: #ECF0F1;
+        border-bottom-color: #3498DB;
+    }
+    
+    .tutorial-section {
+        background: rgba(52, 152, 219, 0.2);
+    }
+    
+    .tutorial-section h3,
+    .tutorial-section p,
+    .tutorial-section li {
+        color: #ECF0F1;
+    }
+    
+    .glossary-term {
+        background: rgba(39, 174, 96, 0.2);
+    }
+    
+    .glossary-term h4 {
+        color: #2ECC71;
+    }
+    
+    .glossary-term p {
+        color: #ECF0F1;
+    }
+}
+
+/* ===== VERY SMALL SCREENS ===== */
+@media (max-width: 320px) {
+    .game-logo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .menu-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        min-height: 45px;
+    }
+    
+    .weapon-slot {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .weapon-slot img {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .tip-content {
+        padding: 1rem;
+    }
+    
+    .tip-title {
+        font-size: 1rem;
+    }
+    
+    .tip-text {
+        font-size: 0.9rem;
+    }
+}
+

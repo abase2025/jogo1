@@ -1,0 +1,162 @@
+{
+  "tutorial_steps": [
+    {
+      "id": 1,
+      "title": "Bem-vindo à Aventura!",
+      "content": "Você é o Dr. Sorriso, um super-herói dentista! Sua missão é proteger a boca das cáries e bactérias malvadas.",
+      "image": "assets/images/characters/dr_sorriso.png",
+      "action": "next"
+    },
+    {
+      "id": 2,
+      "title": "Como se Mover",
+      "content": "Use as setas do teclado ou WASD para mover o Dr. Sorriso. No celular, toque na tela para se mover.",
+      "highlight": "movement",
+      "action": "practice_movement"
+    },
+    {
+      "id": 3,
+      "title": "Como Atacar",
+      "content": "Clique ou toque nos inimigos para atacá-los com sua arma atual. Mire bem para não desperdiçar energia!",
+      "highlight": "attack",
+      "action": "practice_attack"
+    },
+    {
+      "id": 4,
+      "title": "Suas Armas",
+      "content": "Você tem várias armas: Escova (1), Fio Dental (2), Enxaguante (3) e Flúor (4). Cada uma é eficaz contra diferentes inimigos!",
+      "highlight": "weapons",
+      "action": "show_weapons"
+    },
+    {
+      "id": 5,
+      "title": "Conhecendo os Inimigos",
+      "content": "Cáries são rápidas, Placa Bacteriana se espalha, e Gengivite é um chefe poderoso. Cada um tem fraquezas específicas!",
+      "image": "assets/images/enemies/carie.png",
+      "action": "show_enemies"
+    },
+    {
+      "id": 6,
+      "title": "Power-ups",
+      "content": "Colete power-ups para recuperar vida, energia e ganhar pontos. Eles aparecem quando você derrota inimigos!",
+      "highlight": "powerups",
+      "action": "show_powerups"
+    },
+    {
+      "id": 7,
+      "title": "Aprendendo Sempre",
+      "content": "Durante o jogo, você receberá dicas sobre saúde bucal. Preste atenção para aprender enquanto se diverte!",
+      "highlight": "education",
+      "action": "show_tip_example"
+    },
+    {
+      "id": 8,
+      "title": "Pronto para Começar!",
+      "content": "Agora você está pronto para sua primeira aventura! Lembre-se: proteja os dentes e aprenda sobre saúde bucal!",
+      "action": "start_game"
+    }
+  ],
+  "tips_by_context": {
+    "first_enemy": {
+      "title": "Primeira Batalha!",
+      "content": "Parabéns por derrotar seu primeiro inimigo! Na vida real, a escovação diária é sua melhor arma contra as cáries.",
+      "educational_fact": "Escove os dentes por pelo menos 2 minutos, duas vezes ao dia."
+    },
+    "weapon_switch": {
+      "title": "Mudança de Arma",
+      "content": "Ótimo! Você aprendeu a trocar de arma. Na vida real, usar escova E fio dental é muito mais eficaz que usar apenas um.",
+      "educational_fact": "O fio dental remove até 40% mais placa que apenas a escovação."
+    },
+    "boss_encounter": {
+      "title": "Chefe Encontrado!",
+      "content": "Você encontrou um chefe! Gengivite é séria e precisa de tratamento profissional na vida real.",
+      "educational_fact": "Gengivas que sangram podem indicar gengivite. Procure um dentista!"
+    },
+    "level_up": {
+      "title": "Nível Aumentado!",
+      "content": "Você evoluiu! Assim como no jogo, cuidar dos dentes melhora com a prática e conhecimento.",
+      "educational_fact": "Visitas regulares ao dentista ajudam a manter a saúde bucal em dia."
+    }
+  },
+  "achievement_descriptions": {
+    "primeiro_inimigo": "Você derrotou seu primeiro inimigo! Assim como na vida real, a primeira escovação é o início de uma vida de cuidados dentários.",
+    "exterminador_caries": "Você se tornou um verdadeiro exterminador de cáries! Continue assim na vida real escovando regularmente.",
+    "mestre_fio_dental": "Parabéns! Você dominou o fio dental. Na vida real, use-o diariamente para uma limpeza completa.",
+    "combo_master": "Combos incríveis! Na vida real, combine escovação, fio dental e enxaguante para resultados máximos.",
+    "sobrevivente": "Resistência impressionante! Assim como no jogo, a constância nos cuidados dentários é fundamental.",
+    "nivel_5": "Você se tornou um dentista experiente! Continue aprendendo sobre saúde bucal na vida real.",
+    "boss_gengivite": "Você venceu a Gengivite! Na vida real, previna-a com boa higiene e visitas regulares ao dentista.",
+    "boss_periodontite": "Vitória épica contra a Periodontite! Na vida real, esta é uma doença séria que requer tratamento profissional.",
+    "colecionador": "Colecionador dedicado! Na vida real, colete conhecimentos sobre saúde bucal visitando seu dentista.",
+    "estudioso": "Verdadeiro estudioso da odontologia! Continue aprendendo para manter seus dentes saudáveis."
+  },
+  "educational_moments": {
+    "after_wave": [
+      "Você completou uma onda! Na vida real, a limpeza diária também é uma 'onda' constante contra as bactérias.",
+      "Onda concluída! Lembre-se: na vida real, as bactérias nunca param, então a higiene deve ser diária.",
+      "Excelente! Assim como você derrotou essa onda, a escovação regular derrota as bactérias da boca."
+    ],
+    "low_health": [
+      "Sua saúde está baixa! Na vida real, dentes danificados também 'perdem vida'. Cuide bem deles!",
+      "Cuidado com sua saúde! Na vida real, dor de dente é sinal de que algo precisa de atenção.",
+      "Recupere sua saúde! Na vida real, tratamentos dentários ajudam a 'restaurar' a saúde dos dentes."
+    ],
+    "perfect_wave": [
+      "Onda perfeita! Na vida real, uma higiene perfeita também previne todos os problemas dentários.",
+      "Sem danos! Assim como no jogo, a prevenção é sempre melhor que o tratamento.",
+      "Perfeito! Na vida real, cuidados preventivos mantêm os dentes sempre saudáveis."
+    ]
+  },
+  "glossary_categories": {
+    "doencas": {
+      "name": "Doenças e Problemas",
+      "icon": "🦠",
+      "description": "Principais problemas que afetam a saúde bucal"
+    },
+    "anatomia": {
+      "name": "Anatomia Dental",
+      "icon": "🦷",
+      "description": "Partes e estruturas dos dentes e boca"
+    },
+    "prevencao": {
+      "name": "Prevenção",
+      "icon": "🛡️",
+      "description": "Métodos e produtos para prevenir problemas"
+    },
+    "tratamento": {
+      "name": "Tratamentos",
+      "icon": "⚕️",
+      "description": "Procedimentos realizados pelo dentista"
+    },
+    "microbiologia": {
+      "name": "Microbiologia",
+      "icon": "🔬",
+      "description": "Bactérias e microrganismos da boca"
+    }
+  },
+  "daily_tips": [
+    "Escove os dentes logo após acordar para eliminar as bactérias que se acumularam durante a noite.",
+    "Use fio dental antes da escovação para soltar a placa entre os dentes.",
+    "Beba água após as refeições para ajudar a limpar a boca naturalmente.",
+    "Evite escovar imediatamente após consumir alimentos ácidos - espere 30 minutos.",
+    "Troque sua escova de dentes a cada 3 meses ou após uma gripe.",
+    "Mastigue chiclete sem açúcar após as refeições para estimular a produção de saliva.",
+    "Limite o consumo de doces e refrigerantes, especialmente entre as refeições.",
+    "Use pasta de dente com flúor para fortalecer o esmalte dos dentes.",
+    "Escove a língua para remover bactérias e combater o mau hálito.",
+    "Faça movimentos circulares suaves ao escovar para não machucar a gengiva."
+  ],
+  "fun_facts": [
+    "Um dente que caiu pode ser reimplantado se for cuidado adequadamente e recolocado rapidamente!",
+    "A saliva produzida em um dia pode encher duas garrafas de água!",
+    "Os dentes começam a se formar antes mesmo do bebê nascer!",
+    "Cada dente tem uma forma única, como uma impressão digital!",
+    "O esmalte dos dentes é mais duro que o aço!",
+    "As pessoas destras tendem a mastigar mais do lado direito!",
+    "A língua é o músculo mais forte do corpo humano!",
+    "Sorrir usa menos músculos que franzir a testa!",
+    "Os dentes de leite começam a cair por volta dos 6 anos!",
+    "Algumas pessoas nascem sem dentes do siso!"
+  ]
+}
+
