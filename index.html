@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Aventura do Sorriso Saudável</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        .game-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .game-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .menu-screen {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .menu-btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .game-screen {
+            display: none;
+            position: relative;
+        }
+
+        .game-hud {
+            background: #f5f5f5;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hud-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .health-bar {
+            width: 150px;
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .score-display, .level-display {
+            background: #2196F3;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .weapon-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .weapon-btn {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .weapon-btn.active {
+            border-color: #4CAF50;
+            background: #E8F5E8;
+        }
+
+        .weapon-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .weapon-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .weapon-1 .weapon-icon { background: #4CAF50; }
+        .weapon-2 .weapon-icon { background: #2196F3; }
+        .weapon-3 .weapon-icon { background: #FF9800; }
+        .weapon-4 .weapon-icon { background: #9C27B0; }
+
+        #game-canvas {
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            border: none;
+            background: #E0F7FA;
+        }
+
+        .game-controls {
+            background: #f5f5f5;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .pause-btn {
+            background: #FF9800;
+            color: white;
+        }
+
+        .home-btn {
+            background: #607D8B;
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .instructions {
+            background: #E3F2FD;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #2196F3;
+        }
+
+        .instructions h3 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            list-style-position: inside;
+            color: #424242;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .gameover-screen {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .gameover-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #FF5722;
+        }
+
+        .gameover-score {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .gameover-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .gameover-btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .menu-return-btn {
+            background: #607D8B;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                margin: 10px;
+            }
+
+            .game-hud {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .weapon-selector {
+                justify-content: center;
+            }
+
+            #game-canvas {
+                height: 400px;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1 class="game-title">🦷 A Aventura do Sorriso Saudável</h1>
+            <p class="game-subtitle">Proteja a Cidade do Sorriso!</p>
+        </div>
+
+        <!-- Menu Screen -->
+        <div id="menu-screen" class="menu-screen">
+            <div class="instructions">
+                <h3>Como Jogar:</h3>
+                <ul>
+                    <li>Use WASD ou setas para mover o Dr. Sorriso</li>
+                    <li>Clique para atacar inimigos (cáries, placa, gengivite)</li>
+                    <li>Use teclas 1-4 para trocar de arma</li>
+                    <li>Cada arma tem poder diferente contra os vilões</li>
+                    <li>Proteja sua saúde e acumule pontos!</li>
+                </ul>
+            </div>
+            
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="startGame()">🎮 Iniciar Jogo</button>
+                <button class="menu-btn" onclick="showInstructions()">📚 Como Jogar</button>
+                <button class="menu-btn" onclick="showGlossary()">📖 Glossário</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="game-screen">
+            <div class="game-hud">
+                <div class="hud-item">
+                    <span>Vida:</span>
+                    <div class="health-bar">
+                        <div class="health-fill"></div>
+                    </div>
+                    <span id="health-text">100/100</span>
+                </div>
+                
+                <div class="hud-item">
+                    <div class="score-display">
+                        Pontos: <span id="score-value">0</span>
+                    </div>
+                </div>
+                
+                <div class="hud-item">
+                    <div class="level-display">
+                        Nível: <span id="level-value">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <canvas id="game-canvas"></canvas>
+
+            <div class="game-hud">
+                <div class="weapon-selector">
+                    <div class="weapon-btn weapon-1 active" onclick="selectWeapon(0)">
+                        <div class="weapon-icon"></div>
+                        <span class="weapon-label">Escova</span>
+                    </div>
+                    <div class="weapon-btn weapon-2" onclick="selectWeapon(1)">
+                        <div class="weapon-icon"></div>
+                        <span class="weapon-label">Fio Dental</span>
+                    </div>
+                    <div class="weapon-btn weapon-3" onclick="selectWeapon(2)">
+                        <div class="weapon-icon"></div>
+                        <span class="weapon-label">Enxaguante</span>
+                    </div>
+                    <div class="weapon-btn weapon-4" onclick="selectWeapon(3)">
+                        <div class="weapon-icon"></div>
+                        <span class="weapon-label">Flúor</span>
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="control-btn pause-btn" onclick="pauseGame()">⏸️ Pausar</button>
+                    <button class="control-btn home-btn" onclick="returnToMenu()">🏠 Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="gameover-screen hidden">
+            <h2 class="gameover-title">Game Over</h2>
+            <p class="gameover-score">Pontuação Final: <span id="final-score">0</span></p>
+            <div class="gameover-buttons">
+                <button class="gameover-btn restart-btn" onclick="restartGame()">Jogar Novamente</button>
+                <button class="gameover-btn menu-return-btn" onclick="returnToMenu()">Menu Principal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global game instance
+        let game = null;
+
+        function startGame() {
+            document.getElementById('menu-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            document.getElementById('gameover-screen').classList.add('hidden');
+            
+            if (game) {
+                game.startGame();
+            }
+        }
+
+        function pauseGame() {
+            if (game) {
+                game.pauseGame();
+            }
+        }
+
+        function restartGame() {
+            document.getElementById('gameover-screen').classList.add('hidden');
+            if (game) {
+                game.restartGame();
+            }
+        }
+
+        function returnToMenu() {
+            document.getElementById('menu-screen').classList.remove('hidden');
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('gameover-screen').classList.add('hidden');
+        }
+
+        function selectWeapon(weaponIndex) {
+            if (game) {
+                game.currentWeapon = weaponIndex;
+                game.updateWeaponUI();
+            }
+        }
+
+        function showInstructions() {
+            alert('Como Jogar:\n\n• Use WASD ou setas para mover\n• Clique para atacar\n• Teclas 1-4 para trocar armas\n• Derrote cáries, placa e gengivite\n• Proteja sua saúde bucal!');
+        }
+
+        function showGlossary() {
+            alert('Glossário Odontológico:\n\n• Cárie: Doença que destrói os dentes\n• Placa Bacteriana: Película com bactérias\n• Gengivite: Inflamação da gengiva\n• Escova: Remove placa e restos\n• Fio Dental: Limpa entre os dentes\n• Enxaguante: Complementa a higiene\n• Flúor: Fortalece o esmalte');
+        }
+
+        // Simple Game Implementation
+        class SimpleGame {
+            constructor() {
+                this.canvas = null;
+                this.ctx = null;
+                this.gameState = 'menu';
+                this.lastTime = 0;
+                
+                // Game objects
+                this.hero = null;
+                this.enemies = [];
+                this.projectiles = [];
+                
+                // Game state
+                this.score = 0;
+                this.level = 1;
+                this.heroHealth = 100;
+                this.heroEnergy = 100;
+                this.currentWeapon = 0;
+                
+                // Input
+                this.keys = new Set();
+                this.mouse = { x: 0, y: 0, pressed: false };
+                
+                // Weapons
+                this.weapons = [
+                    { name: 'Escova', color: '#4CAF50', damage: 20 },
+                    { name: 'Fio Dental', color: '#2196F3', damage: 15 },
+                    { name: 'Enxaguante', color: '#FF9800', damage: 25 },
+                    { name: 'Flúor', color: '#9C27B0', damage: 30 }
+                ];
+                
+                this.init();
+            }
+            
+            init() {
+                this.canvas = document.getElementById('game-canvas');
+                if (!this.canvas) {
+                    console.error('Canvas not found');
+                    return;
+                }
+                
+                this.ctx = this.canvas.getContext('2d');
+                this.canvas.width = 800;
+                this.canvas.height = 600;
+                
+                // Create hero
+                this.hero = {
+                    x: 400,
+                    y: 300,
+                    width: 40,
+                    height: 40,
+                    color: '#00BCD4',
+                    speed: 5
+                };
+                
+                this.setupEventListeners();
+                this.gameLoop();
+                
+                console.log('✅ Game initialized successfully!');
+            }
+            
+            setupEventListeners() {
+                document.addEventListener('keydown', (e) => {
+                    this.keys.add(e.code);
+                    
+                    if (e.code >= 'Digit1' && e.code <= 'Digit4') {
+                        this.currentWeapon = parseInt(e.code.slice(-1)) - 1;
+                        this.updateWeaponUI();
+                    }
+                });
+                
+                document.addEventListener('keyup', (e) => {
+                    this.keys.delete(e.code);
+                });
+                
+                this.canvas.addEventListener('click', (e) => {
+                    if (this.gameState === 'playing') {
+                        const rect = this.canvas.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        this.shoot(x, y);
+                    }
+                });
+                
+                this.canvas.addEventListener('mousemove', (e) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    this.mouse.x = e.clientX - rect.left;
+                    this.mouse.y = e.clientY - rect.top;
+                });
+            }
+            
+            gameLoop(currentTime = 0) {
+                const deltaTime = currentTime - this.lastTime;
+                this.lastTime = currentTime;
+                
+                this.update(deltaTime);
+                this.render();
+                
+                requestAnimationFrame((time) => this.gameLoop(time));
+            }
+            
+            update(deltaTime) {
+                if (this.gameState !== 'playing') return;
+                
+                this.updateHero();
+                this.updateProjectiles();
+                this.updateEnemies();
+                
+                if (Math.random() < 0.01) {
+                    this.spawnEnemy();
+                }
+                
+                this.checkCollisions();
+                this.updateUI();
+            }
+            
+            updateHero() {
+                if (this.keys.has('ArrowLeft') || this.keys.has('KeyA')) {
+                    this.hero.x = Math.max(20, this.hero.x - this.hero.speed);
+                }
+                if (this.keys.has('ArrowRight') || this.keys.has('KeyD')) {
+                    this.hero.x = Math.min(this.canvas.width - 20, this.hero.x + this.hero.speed);
+                }
+                if (this.keys.has('ArrowUp') || this.keys.has('KeyW')) {
+                    this.hero.y = Math.max(20, this.hero.y - this.hero.speed);
+                }
+                if (this.keys.has('ArrowDown') || this.keys.has('KeyS')) {
+                    this.hero.y = Math.min(this.canvas.height - 20, this.hero.y + this.hero.speed);
+                }
+            }
+            
+            updateProjectiles() {
+                for (let i = this.projectiles.length - 1; i >= 0; i--) {
+                    const proj = this.projectiles[i];
+                    proj.x += proj.vx;
+                    proj.y += proj.vy;
+                    
+                    if (proj.x < 0 || proj.x > this.canvas.width || 
+                        proj.y < 0 || proj.y > this.canvas.height) {
+                        this.projectiles.splice(i, 1);
+                    }
+                }
+            }
+            
+            updateEnemies() {
+                for (let enemy of this.enemies) {
+                    const dx = this.hero.x - enemy.x;
+                    const dy = this.hero.y - enemy.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist > 0) {
+                        enemy.x += (dx / dist) * enemy.speed;
+                        enemy.y += (dy / dist) * enemy.speed;
+                    }
+                }
+            }
+            
+            spawnEnemy() {
+                const side = Math.floor(Math.random() * 4);
+                let x, y;
+                
+                switch (side) {
+                    case 0: x = Math.random() * this.canvas.width; y = -20; break;
+                    case 1: x = this.canvas.width + 20; y = Math.random() * this.canvas.height; break;
+                    case 2: x = Math.random() * this.canvas.width; y = this.canvas.height + 20; break;
+                    case 3: x = -20; y = Math.random() * this.canvas.height; break;
+                }
+                
+                const types = [
+                    { name: 'Cárie', color: '#8B4513', size: 25, speed: 1 },
+                    { name: 'Placa', color: '#228B22', size: 30, speed: 0.8 },
+                    { name: 'Gengivite', color: '#DC143C', size: 35, speed: 0.6 }
+                ];
+                
+                const type = types[Math.floor(Math.random() * types.length)];
+                
+                this.enemies.push({
+                    x, y,
+                    width: type.size,
+                    height: type.size,
+                    color: type.color,
+                    speed: type.speed,
+                    health: 50,
+                    type: type.name
+                });
+            }
+            
+            shoot(targetX, targetY) {
+                const dx = targetX - this.hero.x;
+                const dy = targetY - this.hero.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist > 0) {
+                    const speed = 8;
+                    this.projectiles.push({
+                        x: this.hero.x,
+                        y: this.hero.y,
+                        vx: (dx / dist) * speed,
+                        vy: (dy / dist) * speed,
+                        color: this.weapons[this.currentWeapon].color,
+                        damage: this.weapons[this.currentWeapon].damage
+                    });
+                }
+            }
+            
+            checkCollisions() {
+                // Projectile vs Enemy
+                for (let i = this.projectiles.length - 1; i >= 0; i--) {
+                    const proj = this.projectiles[i];
+                    
+                    for (let j = this.enemies.length - 1; j >= 0; j--) {
+                        const enemy = this.enemies[j];
+                        
+                        if (this.isColliding(proj, enemy)) {
+                            enemy.health -= proj.damage;
+                            this.projectiles.splice(i, 1);
+                            
+                            if (enemy.health <= 0) {
+                                this.enemies.splice(j, 1);
+                                this.score += 10;
+                            }
+                            break;
+                        }
+                    }
+                }
+                
+                // Enemy vs Hero
+                for (let i = this.enemies.length - 1; i >= 0; i--) {
+                    const enemy = this.enemies[i];
+                    
+                    if (this.isColliding(this.hero, enemy)) {
+                        this.heroHealth -= 5;
+                        this.enemies.splice(i, 1);
+                        
+                        if (this.heroHealth <= 0) {
+                            this.gameOver();
+                        }
+                    }
+                }
+            }
+            
+            isColliding(obj1, obj2) {
+                return obj1.x < obj2.x + obj2.width &&
+                       obj1.x + (obj1.width || 5) > obj2.x &&
+                       obj1.y < obj2.y + obj2.height &&
+                       obj1.y + (obj1.height || 5) > obj2.y;
+            }
+            
+            render() {
+                this.ctx.fillStyle = '#E0F7FA';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                if (this.gameState === 'playing') {
+                    this.renderGame();
+                }
+            }
+            
+            renderGame() {
+                // Background pattern
+                this.ctx.strokeStyle = '#B2EBF2';
+                this.ctx.lineWidth = 1;
+                for (let i = 0; i < this.canvas.width; i += 50) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(i, 0);
+                    this.ctx.lineTo(i, this.canvas.height);
+                    this.ctx.stroke();
+                }
+                for (let i = 0; i < this.canvas.height; i += 50) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, i);
+                    this.ctx.lineTo(this.canvas.width, i);
+                    this.ctx.stroke();
+                }
+                
+                // Hero
+                this.ctx.fillStyle = this.hero.color;
+                this.ctx.fillRect(this.hero.x - this.hero.width/2, this.hero.y - this.hero.height/2, 
+                                 this.hero.width, this.hero.height);
+                
+                this.ctx.fillStyle = '#000';
+                this.ctx.font = '12px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText('Dr. Sorriso', this.hero.x, this.hero.y - 30);
+                
+                // Enemies
+                this.enemies.forEach(enemy => {
+                    this.ctx.fillStyle = enemy.color;
+                    this.ctx.fillRect(enemy.x - enemy.width/2, enemy.y - enemy.height/2, 
+                                     enemy.width, enemy.height);
+                    
+                    this.ctx.fillStyle = '#FFF';
+                    this.ctx.font = '10px Arial';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText(enemy.type, enemy.x, enemy.y + 3);
+                });
+                
+                // Projectiles
+                this.projectiles.forEach(proj => {
+                    this.ctx.fillStyle = proj.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(proj.x, proj.y, 3, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+                
+                // Crosshair
+                this.ctx.strokeStyle = '#FF5722';
+                this.ctx.lineWidth = 2;
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.mouse.x - 10, this.mouse.y);
+                this.ctx.lineTo(this.mouse.x + 10, this.mouse.y);
+                this.ctx.moveTo(this.mouse.x, this.mouse.y - 10);
+                this.ctx.lineTo(this.mouse.x, this.mouse.y + 10);
+                this.ctx.stroke();
+            }
+            
+            updateUI() {
+                const healthBar = document.querySelector('.health-fill');
+                if (healthBar) {
+                    healthBar.style.width = `${this.heroHealth}%`;
+                }
+                
+                const healthText = document.getElementById('health-text');
+                if (healthText) {
+                    healthText.textContent = `${this.heroHealth}/100`;
+                }
+                
+                const scoreElement = document.getElementById('score-value');
+                if (scoreElement) {
+                    scoreElement.textContent = this.score;
+                }
+                
+                const levelElement = document.getElementById('level-value');
+                if (levelElement) {
+                    levelElement.textContent = this.level;
+                }
+            }
+            
+            updateWeaponUI() {
+                const weaponButtons = document.querySelectorAll('.weapon-btn');
+                weaponButtons.forEach((btn, index) => {
+                    if (index === this.currentWeapon) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+            
+            startGame() {
+                this.gameState = 'playing';
+                this.score = 0;
+                this.heroHealth = 100;
+                this.heroEnergy = 100;
+                this.enemies = [];
+                this.projectiles = [];
+                this.hero.x = 400;
+                this.hero.y = 300;
+                
+                console.log('🎮 Game started!');
+            }
+            
+            pauseGame() {
+                this.gameState = this.gameState === 'playing' ? 'paused' : 'playing';
+            }
+            
+            restartGame() {
+                this.startGame();
+            }
+            
+            gameOver() {
+                this.gameState = 'gameover';
+                document.getElementById('final-score').textContent = this.score;
+                document.getElementById('gameover-screen').classList.remove('hidden');
+            }
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                game = new SimpleGame();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
+
